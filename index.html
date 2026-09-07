@@ -162,7 +162,7 @@
     </div>
   </header>
 
-  <!-- MODAL IDENTIFICACIÓN AK (Solo se usará de forma automática al entrar si no hay AK guardado) -->
+  <!-- MODAL IDENTIFICACIÓN AK -->
   <div class="fixed inset-0 z-[100] bg-surface-container-lowest/95 backdrop-blur-xl flex items-center justify-center p-unit-md hidden" id="userIdentityModal">
     <div class="bg-surface-container p-unit-xl rounded-xl max-w-md w-full flex flex-col items-center text-center shadow-2xl relative border border-primary-fixed/30">
       <div class="w-16 h-16 rounded-full bg-primary-fixed/10 border border-primary-fixed/40 flex items-center justify-center text-primary-fixed mb-unit-md">
@@ -658,7 +658,6 @@
     const headerProfileName = document.getElementById('headerProfileName');
     const headerProfileStatus = document.getElementById('headerProfileStatus');
     const headerProfileAvatar = document.getElementById('headerProfileAvatar');
-    // Ya no se incluye headerProfileBtn para eventos de clic
 
     let globalVoteCounts = {};
 
@@ -683,8 +682,6 @@
         userIdentityModal.classList.add('hidden');
       }
     });
-
-    // Se ha eliminado el evento que permitía pulsar sobre el perfil para modificar el AK
 
     function updateHeaderUserUI() {
       if (userAk) {
@@ -781,12 +778,13 @@
         const isTop1 = index === 0 && mc.votes > 0;
         const isTop2 = index === 1 && mc.votes > 0;
 
+        // Se cambia el color de la barra principal de amarillo (primary-fixed) a verde oscuro (#14532d o similar con bg-[rgb(...)])
         let barColor = "bg-surface-container-highest";
         let textPercentageColor = "text-outline";
         
         if (isTop1) {
-          barColor = "bg-primary-fixed"; 
-          textPercentageColor = "text-primary-fixed";
+          barColor = "bg-[rgb(16,85,42)]"; // Verde oscuro nítido para contraste con letras blancas
+          textPercentageColor = "text-emerald-400";
         } else if (isTop2) {
           barColor = "bg-secondary-container"; 
           textPercentageColor = "text-secondary-fixed";
