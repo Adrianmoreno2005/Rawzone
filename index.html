@@ -150,12 +150,12 @@
           <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Votos</span>
           <span class="font-label-lg text-label-lg text-primary-fixed" id="totalVotesCount">0</span>
         </div>
-        <!-- PERFIL EN HEADER -->
+        <!-- PERFIL EN HEADER (Visible también en móvil) -->
         <div class="flex items-center gap-unit-sm bg-surface-container-high px-unit-sm py-unit-xs rounded cursor-pointer hover:bg-surface-container-highest transition-all" id="headerProfileBtn">
-          <img alt="Profile" id="headerProfileAvatar" class="w-8 h-8 rounded-full object-cover border border-primary-fixed/30" src="https://api.dicebear.com/7.x/bottts/svg?seed=USER">
-          <div class="hidden md:flex flex-col">
-            <span class="font-label-sm text-label-sm text-primary font-bold uppercase truncate max-w-[120px]" id="headerProfileName">JURADO</span>
-            <span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider" id="headerProfileStatus">VOTO PENDIENTE</span>
+          <img alt="Profile" id="headerProfileAvatar" class="w-8 h-8 rounded-full object-cover border border-primary-fixed/30 flex-shrink-0" src="https://api.dicebear.com/7.x/bottts/svg?seed=USER">
+          <div class="flex flex-col text-left">
+            <span class="font-label-sm text-label-sm text-primary font-bold uppercase truncate max-w-[90px] sm:max-w-[120px]" id="headerProfileName">JURADO</span>
+            <span class="font-label-sm text-[9px] sm:text-label-sm text-primary-fixed uppercase tracking-wider" id="headerProfileStatus">VOTO PENDIENTE</span>
           </div>
         </div>
       </div>
@@ -699,10 +699,10 @@
 
       if (hasAlreadyVoted()) {
         headerProfileStatus.textContent = "VOTO REALIZADO";
-        headerProfileStatus.className = "font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-bold";
+        headerProfileStatus.className = "font-label-sm text-[9px] sm:text-label-sm text-primary-fixed uppercase tracking-wider font-bold";
       } else {
         headerProfileStatus.textContent = "VOTO PENDIENTE";
-        headerProfileStatus.className = "font-label-sm text-label-sm text-secondary-fixed uppercase tracking-wider";
+        headerProfileStatus.className = "font-label-sm text-[9px] sm:text-label-sm text-secondary-fixed uppercase tracking-wider";
       }
     }
 
@@ -831,9 +831,10 @@
         dockLockBtn.className = 'w-full lg:w-auto px-unit-xl py-unit-md bg-surface-container-highest text-outline font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all cursor-not-allowed opacity-60 flex items-center justify-center gap-2';
         dockLockBtnText.textContent = 'ENVIAR FINALISTAS AL ESCENARIO (2/2)';
 
+        // BLOQUEO TOTAL: Impide que el usuario pueda pulsar o interactuar con las tarjetas de los MCs
         cards.forEach(card => {
           card.style.pointerEvents = 'none';
-          card.classList.add('opacity-50');
+          card.classList.add('opacity-60', 'grayscale-[30%]');
         });
 
         if (selectedMcs[0]) {
