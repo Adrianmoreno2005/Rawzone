@@ -786,30 +786,28 @@
 
         let barColor = "bg-surface-container-highest";
         let textPercentageColor = "text-outline";
-        let barTextColor = "text-on-surface"; 
         
         if (isTop1) {
           barColor = "bg-primary-fixed"; 
           textPercentageColor = "text-primary-fixed";
-          barTextColor = "text-on-primary-fixed"; 
         } else if (isTop2) {
           barColor = "bg-secondary-container"; 
           textPercentageColor = "text-secondary-fixed";
-          barTextColor = "text-on-secondary-container"; 
-        } else {
-          barTextColor = "text-on-surface-variant";
         }
 
-        const barHeightPercentage = mc.percentage > 0 ? Math.max(mc.percentage, 15) : 8;
+        const barHeightPercentage = mc.percentage > 0 ? Math.max(mc.percentage, 10) : 0;
 
         barWrapper.innerHTML = `
           <div class="flex flex-col items-center mb-1">
             <span class="font-label-sm text-[11px] font-bold ${textPercentageColor}">${mc.percentage}%</span>
             <span class="font-label-sm text-[9px] text-outline/80">(${mc.votes})</span>
           </div>
-          <div class="w-full bg-surface-container rounded-t-md relative overflow-hidden flex items-end h-[240px]">
-            <div class="w-full ${barColor} rounded-t-md transition-all duration-500 group-hover:brightness-125 flex items-center justify-center overflow-hidden" style="height: ${barHeightPercentage}%;">
-              <span class="font-headline-sm text-[11px] md:text-[13px] ${barTextColor} uppercase tracking-widest whitespace-nowrap" style="writing-mode: vertical-lr; transform: rotate(180deg);">${mc.name}</span>
+          <div class="w-full bg-surface-container rounded-t-md relative overflow-hidden h-[240px]">
+            <!-- Color de la barra subiendo desde abajo -->
+            <div class="absolute bottom-0 left-0 w-full ${barColor} rounded-t-md transition-all duration-500 group-hover:brightness-125" style="height: ${barHeightPercentage}%;"></div>
+            <!-- Nombre centrado absolutamente en toda la pista para que siempre esté perfectamente visible -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <span class="font-headline-sm text-[11px] md:text-[13px] text-on-surface uppercase tracking-widest whitespace-nowrap" style="writing-mode: vertical-lr; transform: rotate(180deg);">${mc.name}</span>
             </div>
           </div>
         `;
