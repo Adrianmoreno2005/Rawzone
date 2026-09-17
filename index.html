@@ -150,7 +150,7 @@
           <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Votos</span>
           <span class="font-label-lg text-label-lg text-primary-fixed" id="totalVotesCount">0</span>
         </div>
-        <!-- PERFIL EN HEADER (BLOQUEADO/NO PULSABLE) -->
+        <!-- PERFIL EN HEADER -->
         <div class="flex items-center gap-unit-sm bg-surface-container-high px-unit-sm py-unit-xs rounded" id="headerProfileBtn">
           <img alt="Profile" id="headerProfileAvatar" class="w-8 h-8 rounded-full object-cover border border-primary-fixed/30" src="https://api.dicebear.com/7.x/bottts/svg?seed=USER">
           <div class="hidden md:flex flex-col">
@@ -254,6 +254,36 @@
           </div>
         </div>
       </div>
+
+      <!-- SECCIÓN DE PATROCINADORES OFICIALES (CON ENLACES EXTERNOS) -->
+      <div class="w-full max-w-7xl mx-auto px-unit-sm md:px-unit-lg my-unit-xl">
+        <div class="bg-surface-container border-2 border-primary-fixed/30 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_0_30px_rgba(202,243,0,0.08)] relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-primary-fixed/10 blur-3xl pointer-events-none"></div>
+          
+          <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-2 z-10">
+            <span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold px-3 py-1 rounded uppercase tracking-widest flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">bolt</span> PATROCINADORES OFICIALES DEL CYPHER
+            </span>
+            <h3 class="font-headline-lg text-headline-lg md:text-3xl text-primary uppercase tracking-wide">ALIADOS DE LA MOVILIDAD Y EL HOGAR</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+              Apoyando firmemente la cultura underground. Conoce a nuestros patrocinadores oficiales: movilidad urbana y el mejor servicio técnico para electrodomésticos. Haz clic en sus logos para visitar sus plataformas.
+            </p>
+          </div>
+
+          <!-- Contenedor de Logos con enlaces -->
+          <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-5 z-10">
+            <!-- Patrocinador 1: Reo Patín (Enlace a Web) -->
+            <a href="https://reopatin.com/" target="_blank" rel="noopener noreferrer" class="bg-white px-6 py-4 rounded-xl border-2 border-primary-fixed flex flex-col items-center justify-center w-[235px] h-32 shadow-[0_4px_20px_rgba(0,0,0,0.4)] group hover:scale-105 transition-all duration-300 cursor-pointer" title="Visitar Reo Patín">
+              <img src="./Logo_reopatin.png" alt="Reo Patín Patrocinador" class="h-24 w-auto object-contain drop-shadow-sm">
+            </a>
+            <!-- Patrocinador 2: RP Multiservicios (Enlace a Facebook) -->
+            <a href="https://www.facebook.com/rpmulti1992/?locale=es_ES" target="_blank" rel="noopener noreferrer" class="bg-white px-6 py-4 rounded-xl border-2 border-surface-container-highest flex flex-col items-center justify-center w-[235px] h-32 shadow-[0_4px_20px_rgba(0,0,0,0.4)] group hover:scale-105 transition-all duration-300 cursor-pointer" title="Visitar Facebook RP Multiservicios">
+              <img src="./logo_rp.png" alt="RP Multiservicios Patrocinador" class="h-24 w-auto object-contain drop-shadow-sm">
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- FIN SECCIÓN PATROCINADORES -->
 
       <div class="w-full max-w-7xl mx-auto px-unit-sm md:px-unit-lg py-unit-xl flex flex-col gap-unit-xl">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-unit-md bg-surface-container-low p-unit-md rounded-lg shadow-sm">
@@ -590,7 +620,6 @@
             Distribución exacta del porcentaje y conteo total de votos registrados.
           </p>
 
-          <!-- CONTESTED BARRAS VERTICALES CONTAINER -->
           <div class="w-full bg-surface-container-lowest p-4 rounded-xl border border-surface-container-highest flex-1 overflow-x-auto min-h-[320px] flex items-end justify-between gap-2 md:gap-4 mb-4" id="verticalBarsContainer">
             <!-- Se llena dinámicamente con JS -->
           </div>
@@ -654,7 +683,6 @@
 
     const totalVotesCount = document.getElementById('totalVotesCount');
 
-    // UI Header Elements
     const userIdentityModal = document.getElementById('userIdentityModal');
     const identityForm = document.getElementById('identityForm');
     const akInput = document.getElementById('akInput');
@@ -1018,3 +1046,4 @@
     fetchVotes();
   </script>
 </body>
+</html>
