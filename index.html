@@ -255,7 +255,7 @@
         </div>
       </div>
 
-      <!-- SECCIÓN DE PATROCINADORES OFICIALES (CON ENLACES EXTERNOS) -->
+      <!-- SECCIÓN DE PATROCINADORES OFICIALES -->
       <div class="w-full max-w-7xl mx-auto px-unit-sm md:px-unit-lg my-unit-xl">
         <div class="bg-surface-container border-2 border-primary-fixed/30 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_0_30px_rgba(202,243,0,0.08)] relative overflow-hidden">
           <div class="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-primary-fixed/10 blur-3xl pointer-events-none"></div>
@@ -272,18 +272,15 @@
 
           <!-- Contenedor de Logos con enlaces -->
           <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-5 z-10">
-            <!-- Patrocinador 1: Reo Patín (Enlace a Web) -->
             <a href="https://reopatin.com/" target="_blank" rel="noopener noreferrer" class="bg-white px-6 py-4 rounded-xl border-2 border-primary-fixed flex flex-col items-center justify-center w-[235px] h-32 shadow-[0_4px_20px_rgba(0,0,0,0.4)] group hover:scale-105 transition-all duration-300 cursor-pointer" title="Visitar Reo Patín">
               <img src="./Logo_reopatin.png" alt="Reo Patín Patrocinador" class="h-24 w-auto object-contain drop-shadow-sm">
             </a>
-            <!-- Patrocinador 2: RP Multiservicios (Enlace a Facebook) -->
             <a href="https://www.facebook.com/rpmulti1992/?locale=es_ES" target="_blank" rel="noopener noreferrer" class="bg-white px-6 py-4 rounded-xl border-2 border-surface-container-highest flex flex-col items-center justify-center w-[235px] h-32 shadow-[0_4px_20px_rgba(0,0,0,0.4)] group hover:scale-105 transition-all duration-300 cursor-pointer" title="Visitar Facebook RP Multiservicios">
               <img src="./Logo_rp.png" alt="RP Multiservicios Patrocinador" class="h-24 w-auto object-contain drop-shadow-sm">
             </a>
           </div>
         </div>
       </div>
-      <!-- FIN SECCIÓN PATROCINADORES -->
 
       <div class="w-full max-w-7xl mx-auto px-unit-sm md:px-unit-lg py-unit-xl flex flex-col gap-unit-xl">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-unit-md bg-surface-container-low p-unit-md rounded-lg shadow-sm">
@@ -632,11 +629,6 @@
 
     </div>
   </main>
-
-  <!-- Botón Flotante para Reiniciar Voto en Pruebas -->
-  <button id="resetVotesBtn" style="position: fixed; bottom: 15px; right: 15px; z-index: 9999; background: #ff5708; color: #fff; padding: 10px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" title="Borrar votos e intentar de nuevo">
-    🔄 REINICIAR MI VOTO (PRUEBAS)
-  </button>
 
   <footer class="w-full bg-surface-container-lowest py-unit-lg px-unit-sm md:px-unit-lg border-t border-surface-container-high">
     <div class="max-w-7xl mx-auto px-unit-sm md:px-unit-lg flex flex-col md:flex-row items-center justify-between gap-unit-md">
@@ -1013,7 +1005,7 @@
           fetchVotes();
         } catch (error) {
           console.error("Error al registrar voto:", error);
-          alert("Hubo un error guardando el voto en Firebase. Si ya habías votado con ese AK, el ID podría estar ocupado.");
+          alert("Hubo un error guardando el voto. Si ya habías votado con ese A.K.A, el registro ya existe.");
         }
       }
     }
@@ -1032,13 +1024,6 @@
 
     closeTop2ModalBtn.addEventListener('click', () => top2Modal.classList.add('hidden'));
     acceptTop2Btn.addEventListener('click', () => top2Modal.classList.add('hidden'));
-
-    document.getElementById('resetVotesBtn').addEventListener('click', () => {
-      localStorage.removeItem('rawzone_has_voted');
-      localStorage.removeItem('rawzone_selected_mcs');
-      localStorage.removeItem('rawzone_user_ak');
-      location.reload();
-    });
 
     checkUserIdentity();
     loadSavedState();
