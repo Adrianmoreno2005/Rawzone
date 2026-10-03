@@ -146,12 +146,6 @@
 
       <!-- BOTÓN Y PERFIL A LA DERECHA -->
       <div class="flex items-center gap-unit-md z-10">
-        <!-- BOTÓN MODO PRUEBA -->
-        <button id="testModeResetBtn" class="bg-amber-500 hover:bg-amber-400 text-black font-label-md text-label-md font-bold px-3 py-1.5 rounded uppercase flex items-center gap-1 shadow-lg transition-all hover:scale-105 active:scale-95" title="Reiniciar votos y reabrir votaciones para pruebas">
-          <span class="material-symbols-outlined text-[18px]">restart_alt</span>
-          <span>PRUEBA</span>
-        </button>
-
         <div class="hidden lg:flex flex-col items-end border-r border-surface-container-highest pr-unit-md">
           <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Votos</span>
           <span class="font-label-lg text-label-lg text-primary-fixed" id="totalVotesCount">0</span>
@@ -191,6 +185,25 @@
           <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE NOTIFICACIÓN: VOTACIONES CERRADAS -->
+  <div class="fixed inset-0 z-[130] bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-center p-unit-md hidden" id="votingClosedAlertModal">
+    <div class="bg-surface-container p-unit-xl rounded-xl max-w-md w-full flex flex-col items-center text-center shadow-2xl relative border border-red-500/50">
+      <div class="w-16 h-16 rounded-full bg-red-500/20 border border-red-500 flex items-center justify-center text-red-500 mb-unit-md">
+        <span class="material-symbols-outlined text-[36px]">lock</span>
+      </div>
+      <span class="bg-red-600 text-white font-label-sm text-label-sm font-bold px-3 py-1 rounded uppercase mb-unit-xs tracking-wider">
+        INFORMACIÓN
+      </span>
+      <h2 class="font-headline-xl text-headline-xl text-primary uppercase">VOTACIONES CERRADAS</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-unit-2xs mb-unit-lg">
+        Se han cerrado las votaciones. Ya no es posible registrar ni cambiar tu voto.
+      </p>
+      <button class="w-full py-unit-sm px-unit-lg bg-red-600 hover:bg-red-700 text-white font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all shadow-lg" id="closeVotingClosedAlertBtn">
+        ACEPTAR
+      </button>
     </div>
   </div>
 
@@ -776,11 +789,11 @@
     const finalMc2Votes = document.getElementById('finalMc2Votes');
     const closeVeredictBtn = document.getElementById('closeVeredictBtn');
 
+    const votingClosedAlertModal = document.getElementById('votingClosedAlertModal');
+    const closeVotingClosedAlertBtn = document.getElementById('closeVotingClosedAlertBtn');
+
     const statusIcon = document.getElementById('statusIcon');
     const statusText = document.getElementById('statusText');
-
-    /* BOTÓN DE REINICIO MODO PRUEBA */
-    const testModeResetBtn = document.getElementById('testModeResetBtn');
 
     let globalVoteCounts = {};
 
@@ -961,7 +974,7 @@
           statusText.className = "font-bold text-red-500 tracking-wider font-label-md";
         }
 
-        voteQuotaBadge.textContent = "VOTACIÓN FINALIZADA";
+        voteQuotaBadge.textContent = "VOTACIÓN CERRADA";
         voteQuotaBadge.className = "bg-red-600 text-white font-label-md text-label-md font-bold px-2 py-0.5 rounded uppercase shadow";
 
         lockVotesBtn.disabled = true;
@@ -973,7 +986,6 @@
         dockLockBtnText.textContent = 'VOTACIONES FINALIZADAS';
 
         cards.forEach(card => {
-          card.style.pointerEvents = 'none';
           card.classList.add('opacity-50');
         });
 
@@ -1000,7 +1012,6 @@
         dockLockBtnText.textContent = 'ENVIAR FINALISTAS AL ESCENARIO (2/2)';
 
         cards.forEach(card => {
-          card.style.pointerEvents = 'none';
           card.classList.add('opacity-50');
         });
 
@@ -1020,7 +1031,6 @@
 
       // Habilitar selección de cartas en caso de estar abiertas y sin haber votado
       cards.forEach(card => {
-        card.style.pointerEvents = 'auto';
         card.classList.remove('opacity-50');
       });
 
@@ -1087,7 +1097,12 @@
 
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        if (hasAlreadyVoted() || isVotingClosed()) return;
+        if (isVotingClosed()) {
+          votingClosedAlertModal.classList.remove('hidden');
+          return;
+        }
+
+        if (hasAlreadyVoted()) return;
 
         const id = card.getAttribute('data-mc-id');
         const name = card.getAttribute('data-mc-name');
@@ -1108,6 +1123,10 @@
       });
     });
 
+    closeVotingClosedAlertBtn.addEventListener('click', () => {
+      votingClosedAlertModal.classList.add('hidden');
+    });
+
     async function submitVotes() {
       if (!userAk) {
         userIdentityModal.classList.remove('hidden');
@@ -1115,7 +1134,7 @@
       }
 
       if (isVotingClosed()) {
-        alert("Las votaciones han sido cerradas por la organización.");
+        votingClosedAlertModal.classList.remove('hidden');
         return;
       }
 
@@ -1173,16 +1192,6 @@
         }
       }
     }
-
-    /* ACCIÓN BOTÓN MODO PRUEBA */
-    testModeResetBtn.addEventListener('click', () => {
-      localStorage.removeItem('rawzone_has_voted');
-      localStorage.removeItem('rawzone_voting_closed');
-      localStorage.removeItem('rawzone_selected_mcs');
-      selectedMcs = [];
-      updateUI();
-      alert("✅ Modo prueba activo: Votaciones reabiertas y voto local reiniciado. Puedes volver a votar.");
-    });
 
     /* LÓGICA BATALLA FINAL CON CONTRASEÑA */
     openFinalBattlePassModalBtn.addEventListener('click', () => {
