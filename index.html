@@ -802,6 +802,15 @@
     }
 
     function checkUserIdentity() {
+      // Si el usuario tenía la sesión anterior guardada, la limpiamos una única vez
+      const resetDone = localStorage.getItem('rawzone_ak_reset_v1');
+      if (!resetDone) {
+        localStorage.removeItem('rawzone_user_ak');
+        localStorage.removeItem('rawzone_has_voted');
+        localStorage.removeItem('rawzone_selected_mcs');
+        localStorage.setItem('rawzone_ak_reset_v1', 'true');
+      }
+
       const savedAk = localStorage.getItem('rawzone_user_ak');
       if (savedAk) {
         userAk = savedAk;
