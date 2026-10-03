@@ -146,6 +146,12 @@
 
       <!-- BOTÓN Y PERFIL A LA DERECHA -->
       <div class="flex items-center gap-unit-md z-10">
+        <!-- BOTÓN MODO PRUEBA -->
+        <button id="testModeResetBtn" class="bg-amber-500 hover:bg-amber-400 text-black font-label-md text-label-md font-bold px-3 py-1.5 rounded uppercase flex items-center gap-1 shadow-lg transition-all hover:scale-105 active:scale-95" title="Reiniciar votos y reabrir votaciones para pruebas">
+          <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+          <span>PRUEBA</span>
+        </button>
+
         <div class="hidden lg:flex flex-col items-end border-r border-surface-container-highest pr-unit-md">
           <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Votos</span>
           <span class="font-label-lg text-label-lg text-primary-fixed" id="totalVotesCount">0</span>
@@ -195,10 +201,10 @@
           <span class="font-label-sm text-label-sm text-outline uppercase tracking-widest hidden sm:inline">CYPHER STAGE // SALA 04 // ELECCIÓN DE LA BATALLA FINAL</span>
         </div>
         <div class="flex items-center gap-unit-md font-label-sm text-label-sm">
-          <div class="flex items-center gap-1 text-on-surface-variant">
-            <span class="material-symbols-outlined text-[16px] text-primary-fixed">lock_open</span>
+          <div class="flex items-center gap-1 text-on-surface-variant" id="statusContainer">
+            <span class="material-symbols-outlined text-[16px] text-primary-fixed" id="statusIcon">lock_open</span>
             <span class="text-on-surface">ESTADO:</span>
-            <span class="font-bold text-primary-fixed tracking-wider font-label-md">VOTACIONES ABIERTAS</span>
+            <span class="font-bold text-primary-fixed tracking-wider font-label-md" id="statusText">VOTACIONES ABIERTAS</span>
           </div>
           <div class="hidden md:flex items-center gap-1 text-outline">
             <span class="material-symbols-outlined text-[16px] text-primary-fixed">verified_user</span>
@@ -251,6 +257,12 @@
               <span class="material-symbols-outlined text-[18px]">bar_chart</span>
               <span>VER QUIÉNES VAN GANANDO</span>
             </button>
+
+            <!-- BOTÓN DE BATALLA FINAL -->
+            <button id="openFinalBattlePassModalBtn" class="w-full py-unit-sm px-unit-md font-headline-sm text-headline-sm uppercase tracking-wider rounded border-2 border-red-600 bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center gap-2 mt-2 shadow-lg">
+              <span class="material-symbols-outlined text-[20px]">swords</span>
+              <span>BATALLA FINAL</span>
+            </button>
           </div>
         </div>
       </div>
@@ -297,84 +309,76 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-unit-md" id="rosterGrid">
 
-          <!-- 1. Clasificado 1 vs Clasificado 3 -->
-          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="clasificado-1" data-mc-name="Clasificado 1" data-mc-role="CLASIFICADO 1">
+          <!-- 1. Vela vs Gerdo -->
+          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="vela" data-mc-name="Vela" data-mc-role="PARA CAMBIAR">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px]">military_tech</span> CLASIFICADO 1
-              </span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#01 PARA CAMBIAR</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
             </div>
             <div class="relative w-full h-auto sm:h-48 my-unit-sm flex items-end justify-center overflow-hidden rounded-lg bg-surface-container-lowest pt-2">
-              <img src="" alt="Clasificado 1" class="w-full h-full object-contain sm:object-cover">
+              <img src="./Vela_Silueta.png" alt="Vela" class="w-full h-full object-contain sm:object-cover">
             </div>
             <div class="relative z-10">
-              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Clasificado 1</h3>
-              <p class="font-label-sm text-label-sm text-primary-fixed font-bold uppercase tracking-widest mt-unit-2xs">VS CLASIFICADO 3</p>
+              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Vela</h3>
+              <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-unit-2xs">VS GERDO</p>
             </div>
           </div>
 
-          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="clasificado-3" data-mc-name="Clasificado 3" data-mc-role="CLASIFICADO 3">
+          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="gerdo" data-mc-name="Gerdo" data-mc-role="HIJO DE DIOS">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px]">military_tech</span> CLASIFICADO 3
-              </span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#02 HIJO DE DIOS</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
             </div>
             <div class="relative w-full h-auto sm:h-48 my-unit-sm flex items-end justify-center overflow-hidden rounded-lg bg-surface-container-lowest pt-2">
-              <img src="" alt="Clasificado 3" class="w-full h-full object-contain sm:object-cover">
+              <img src="./Gerdo_Silueta.png" alt="Gerdo" class="w-full h-full object-contain sm:object-cover">
             </div>
             <div class="relative z-10">
-              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Clasificado 3</h3>
-              <p class="font-label-sm text-label-sm text-primary-fixed font-bold uppercase tracking-widest mt-unit-2xs">VS CLASIFICADO 1</p>
+              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Gerdo</h3>
+              <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-unit-2xs">VS VELA</p>
             </div>
           </div>
 
-          <!-- 2. Clasificado 2 vs clasificado 4 -->
-          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="clasificado-2" data-mc-name="Clasificado 2" data-mc-role="CLASIFICADO 2">
+          <!-- 2. Nate vs Starstriker -->
+          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="nate" data-mc-name="Nate" data-mc-role="EL HIJO DE HADES">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px]">military_tech</span> CLASIFICADO 2
-              </span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#03 EL HIJO DE HADES</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
             </div>
             <div class="relative w-full h-auto sm:h-48 my-unit-sm flex items-end justify-center overflow-hidden rounded-lg bg-surface-container-lowest pt-2">
-              <img src="" alt="Clasificado 2" class="w-full h-full object-contain sm:object-cover">
+              <img src="./Nate_Silueta.png" alt="Nate" class="w-full h-full object-contain sm:object-cover">
             </div>
             <div class="relative z-10">
-              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Clasificado 2</h3>
-              <p class="font-label-sm text-label-sm text-primary-fixed font-bold uppercase tracking-widest mt-unit-2xs">VS CLASIFICADO 4</p>
+              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Nate</h3>
+              <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-unit-2xs">VS STARSTRIKER</p>
             </div>
           </div>
 
-          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="clasificado-4" data-mc-name="Clasificado 4" data-mc-role="CLASIFICADO 4">
+          <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="starstriker" data-mc-name="Starstriker" data-mc-role="LA SONRISA DEL DIABLO">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px]">military_tech</span> CLASIFICADO 4
-              </span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#04 LA SONRISA DEL DIABLO</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
             </div>
             <div class="relative w-full h-auto sm:h-48 my-unit-sm flex items-end justify-center overflow-hidden rounded-lg bg-surface-container-lowest pt-2">
-              <img src="" alt="Clasificado 4" class="w-full h-full object-contain sm:object-cover">
+              <img src="" alt="Starstriker" class="w-full h-full object-contain sm:object-cover">
             </div>
             <div class="relative z-10">
-              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Clasificado 4</h3>
-              <p class="font-label-sm text-label-sm text-primary-fixed font-bold uppercase tracking-widest mt-unit-2xs">VS CLASIFICADO 2</p>
+              <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Starstriker</h3>
+              <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-unit-2xs">VS NATE</p>
             </div>
           </div>
 
           <!-- 3. Xiro vs Nacho RG -->
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="Xiro" data-mc-name="Xiro" data-mc-role="CAMPEÓN">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#03 CALM MIND</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#05 CALM MIND</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -390,7 +394,7 @@
 
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="Nacho RG" data-mc-name="Nacho RG" data-mc-role="ESTILO FLOW">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#04 LA ANOMALÍA</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#06 LA ANOMALÍA</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -407,7 +411,7 @@
           <!-- 4. Silence vs Xp -->
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="silence" data-mc-name="Silence" data-mc-role="ASESINO SILENCIOSO">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#05 CUERVO BLANCO</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#07 CUERVO BLANCO</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -423,7 +427,7 @@
 
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="xp" data-mc-name="Xp" data-mc-role="EXPERIENCIA RAW">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#06 EL SANTO</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#08 EL SANTO</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -440,7 +444,7 @@
           <!-- 5. Binario vs Teno -->
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="binario" data-mc-name="Binario" data-mc-role="TECNOLOGÍA Y RIMA">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#07 LA VOZ DEL UNDER</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#09 LA VOZ DEL UNDER</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -456,7 +460,7 @@
 
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="teno" data-mc-name="Teno" data-mc-role="PUNCHLINE">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#08 TRES CRUCES</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#10 TRES CRUCES</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -473,7 +477,7 @@
           <!-- 6. Bardu vs DSM -->
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="bardu" data-mc-name="Bardu" data-mc-role="BARDU">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#09 EL BULLY</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#11 EL BULLY</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -489,7 +493,7 @@
 
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="dsm" data-mc-name="DSM" data-mc-role="DSM">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#10 EL HIJO DE LA LUNA</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#12 EL HIJO DE LA LUNA</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -506,7 +510,7 @@
           <!-- 7. Guspi vs Tempo -->
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="guspi" data-mc-name="Guspi" data-mc-role="ESTILO CALLEJERO">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#11 FE Y PASIÓN✝️</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#13 FE Y PASIÓN✝️</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -522,7 +526,7 @@
 
           <div class="mc-card group relative bg-surface-container p-unit-md rounded-xl flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-high cursor-pointer shadow-lg overflow-hidden" data-mc-id="tempo" data-mc-name="Tempo" data-mc-role="LÍRICA PURA">
             <div class="flex items-start justify-between relative z-10">
-              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#12 THE PROFESSOR</span>
+              <span class="bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase">#14 THE PROFESSOR</span>
               <span class="vote-badge font-label-sm text-label-sm bg-surface-container-highest text-outline px-2 py-0.5 rounded uppercase flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span> VOTO
               </span>
@@ -627,6 +631,81 @@
         </div>
       </div>
 
+      <!-- MODAL CONTRASEÑA BATALLA FINAL -->
+      <div class="fixed inset-0 z-[110] bg-surface-container-lowest/95 backdrop-blur-xl flex items-center justify-center p-unit-md hidden" id="finalBattlePassModal">
+        <div class="bg-surface-container p-unit-xl rounded-xl max-w-md w-full flex flex-col items-center text-center shadow-2xl relative border border-red-500/40">
+          <button id="closePassModalBtn" class="absolute top-4 right-4 text-outline hover:text-primary">
+            <span class="material-symbols-outlined text-[24px]">close</span>
+          </button>
+          <div class="w-16 h-16 rounded-full bg-red-500/20 border border-red-500/50 flex items-center justify-center text-red-400 mb-unit-md">
+            <span class="material-symbols-outlined text-[36px]">key</span>
+          </div>
+          <span class="bg-red-600 text-white font-label-sm text-label-sm font-bold px-2 py-0.5 rounded uppercase mb-unit-xs tracking-wider">
+            ACCESO RESTRINGIDO
+          </span>
+          <h2 class="font-headline-xl text-headline-xl text-primary uppercase">CERRAR VOTACIONES</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-unit-2xs mb-unit-lg">
+            Ingresa la contraseña de organización para finalizar las votaciones y dar a conocer a los 2 clasificados.
+          </p>
+          
+          <form id="passForm" class="w-full flex flex-col gap-unit-md">
+            <div class="relative w-full">
+              <input type="password" id="passInput" required placeholder="Contraseña..." class="w-full bg-surface-container-lowest text-primary font-headline-sm text-headline-sm px-4 py-3 rounded border border-surface-container-highest focus:border-red-500 outline-none text-center tracking-wider placeholder:text-outline/50 transition-all">
+            </div>
+            <p id="passError" class="text-red-400 font-label-sm hidden font-bold">Contraseña incorrecta. Inténtalo de nuevo.</p>
+            <button type="submit" class="w-full py-unit-md px-unit-lg bg-red-600 hover:bg-red-700 text-white font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all shadow-lg flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[20px]">lock</span>
+              <span>VEREDICTO FINAL</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- MODAL VEREDICTO BATALLA FINAL -->
+      <div class="fixed inset-0 z-[120] bg-surface-container-lowest/95 backdrop-blur-2xl flex items-center justify-center p-unit-md hidden" id="finalBattleVeredictModal">
+        <div class="bg-surface-container p-unit-xl rounded-2xl max-w-2xl w-full flex flex-col items-center text-center shadow-[0_0_50px_rgba(239,68,68,0.3)] relative border-2 border-red-500/60 overflow-hidden">
+          
+          <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-primary-fixed/10 blur-3xl pointer-events-none"></div>
+
+          <div class="w-20 h-20 rounded-full bg-red-600/20 border-2 border-red-500 flex items-center justify-center text-red-500 mb-unit-md shadow-[0_0_20px_rgba(239,68,68,0.4)] animate-pulse">
+            <span class="material-symbols-outlined text-[48px]">trophy</span>
+          </div>
+          
+          <span class="bg-red-600 text-white font-label-sm text-label-lg font-bold px-4 py-1 rounded-full uppercase tracking-widest mb-unit-xs shadow">
+            🔥 VEREDICTO FINAL - VOTACIONES CERRADAS 🔥
+          </span>
+          
+          <h2 class="font-headline-xl text-3xl md:text-5xl text-primary uppercase tracking-wide my-2">
+            GRAN BATALLA FINAL
+          </h2>
+          
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-6">
+            Por decisión del público y votos acumulados en la plataforma, los 2 MCs que pasan a enfrentarse por la gloria son:
+          </p>
+
+          <div class="w-full bg-surface-container-lowest p-6 rounded-xl border border-red-500/30 mb-8 flex flex-col sm:flex-row justify-around items-center gap-6 shadow-inner">
+            <div class="flex flex-col items-center">
+              <span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest mb-1 font-bold">1º MÁS VOTADO</span>
+              <span class="font-headline-xl text-2xl md:text-4xl text-primary uppercase font-bold tracking-wider" id="finalMc1">CARGANDO...</span>
+              <span class="font-label-sm text-label-sm text-outline mt-1" id="finalMc1Votes">0 votos</span>
+            </div>
+            
+            <div class="text-3xl md:text-5xl font-headline-xl text-red-500 font-bold italic drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">VS</div>
+            
+            <div class="flex flex-col items-center">
+              <span class="font-label-sm text-label-sm text-secondary-fixed uppercase tracking-widest mb-1 font-bold">2º MÁS VOTADO</span>
+              <span class="font-headline-xl text-2xl md:text-4xl text-primary uppercase font-bold tracking-wider" id="finalMc2">CARGANDO...</span>
+              <span class="font-label-sm text-label-sm text-outline mt-1" id="finalMc2Votes">0 votos</span>
+            </div>
+          </div>
+
+          <button class="w-full py-unit-md px-unit-lg bg-red-600 hover:bg-red-700 text-white font-headline-sm text-headline-sm uppercase tracking-wider rounded-xl transition-all shadow-xl hover:scale-[1.02]" id="closeVeredictBtn">
+            ACEPTAR Y CERRAR
+          </button>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -682,7 +761,32 @@
     const headerProfileStatus = document.getElementById('headerProfileStatus');
     const headerProfileAvatar = document.getElementById('headerProfileAvatar');
 
+    /* ELEMENTOS BATALLA FINAL Y CONTRASEÑA */
+    const openFinalBattlePassModalBtn = document.getElementById('openFinalBattlePassModalBtn');
+    const finalBattlePassModal = document.getElementById('finalBattlePassModal');
+    const closePassModalBtn = document.getElementById('closePassModalBtn');
+    const passForm = document.getElementById('passForm');
+    const passInput = document.getElementById('passInput');
+    const passError = document.getElementById('passError');
+
+    const finalBattleVeredictModal = document.getElementById('finalBattleVeredictModal');
+    const finalMc1 = document.getElementById('finalMc1');
+    const finalMc2 = document.getElementById('finalMc2');
+    const finalMc1Votes = document.getElementById('finalMc1Votes');
+    const finalMc2Votes = document.getElementById('finalMc2Votes');
+    const closeVeredictBtn = document.getElementById('closeVeredictBtn');
+
+    const statusIcon = document.getElementById('statusIcon');
+    const statusText = document.getElementById('statusText');
+
+    /* BOTÓN DE REINICIO MODO PRUEBA */
+    const testModeResetBtn = document.getElementById('testModeResetBtn');
+
     let globalVoteCounts = {};
+
+    function isVotingClosed() {
+      return localStorage.getItem('rawzone_voting_closed') === 'true';
+    }
 
     function checkUserIdentity() {
       const savedAk = localStorage.getItem('rawzone_user_ak');
@@ -714,7 +818,10 @@
         headerProfileName.textContent = "JURADO";
       }
 
-      if (hasAlreadyVoted()) {
+      if (isVotingClosed()) {
+        headerProfileStatus.textContent = "VOTACIÓN CERRADA";
+        headerProfileStatus.className = "font-label-sm text-label-sm text-red-500 uppercase tracking-wider font-bold";
+      } else if (hasAlreadyVoted()) {
         headerProfileStatus.textContent = "VOTO REALIZADO";
         headerProfileStatus.className = "font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-bold";
       } else {
@@ -770,9 +877,22 @@
         }
 
         renderVerticalBarsUI();
+        return getTop2Mcs();
       } catch (err) {
         console.error("Error leyendo votos:", err);
+        return [];
       }
+    }
+
+    function getTop2Mcs() {
+      const allMcs = Array.from(cards).map(c => c.getAttribute('data-mc-name'));
+      const uniqueMcs = Array.from(new Set(allMcs));
+      const mcData = uniqueMcs.map(name => ({
+        name,
+        votes: globalVoteCounts[name] || 0
+      }));
+      mcData.sort((a, b) => b.votes - a.votes);
+      return mcData.slice(0, 2);
     }
 
     function renderVerticalBarsUI() {
@@ -834,6 +954,39 @@
     function updateUI() {
       updateHeaderUserUI();
 
+      if (isVotingClosed()) {
+        if (statusIcon) statusIcon.textContent = "lock";
+        if (statusText) {
+          statusText.textContent = "VOTACIONES CERRADAS";
+          statusText.className = "font-bold text-red-500 tracking-wider font-label-md";
+        }
+
+        voteQuotaBadge.textContent = "VOTACIÓN FINALIZADA";
+        voteQuotaBadge.className = "bg-red-600 text-white font-label-md text-label-md font-bold px-2 py-0.5 rounded uppercase shadow";
+
+        lockVotesBtn.disabled = true;
+        lockVotesBtn.className = 'w-full mt-unit-2xs py-unit-sm px-unit-md font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all flex items-center justify-center gap-2 bg-surface-container-highest text-outline cursor-not-allowed opacity-60';
+        lockVotesBtnText.textContent = 'VOTACIONES CERRADAS POR LA ORGANIZACIÓN';
+
+        dockLockBtn.disabled = true;
+        dockLockBtn.className = 'w-full lg:w-auto px-unit-xl py-unit-md bg-surface-container-highest text-outline font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all cursor-not-allowed opacity-60 flex items-center justify-center gap-2';
+        dockLockBtnText.textContent = 'VOTACIONES FINALIZADAS';
+
+        cards.forEach(card => {
+          card.style.pointerEvents = 'none';
+          card.classList.add('opacity-50');
+        });
+
+        return;
+      }
+
+      // Si las votaciones están abiertas
+      if (statusIcon) statusIcon.textContent = "lock_open";
+      if (statusText) {
+        statusText.textContent = "VOTACIONES ABIERTAS";
+        statusText.className = "font-bold text-primary-fixed tracking-wider font-label-md";
+      }
+
       if (hasAlreadyVoted()) {
         voteQuotaBadge.textContent = "VOTO REALIZADO";
         voteQuotaBadge.className = "bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold px-2 py-0.5 rounded uppercase shadow";
@@ -864,6 +1017,12 @@
 
         return;
       }
+
+      // Habilitar selección de cartas en caso de estar abiertas y sin haber votado
+      cards.forEach(card => {
+        card.style.pointerEvents = 'auto';
+        card.classList.remove('opacity-50');
+      });
 
       const count = selectedMcs.length;
       const remaining = MAX_VOTES - count;
@@ -928,7 +1087,7 @@
 
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        if (hasAlreadyVoted()) return;
+        if (hasAlreadyVoted() || isVotingClosed()) return;
 
         const id = card.getAttribute('data-mc-id');
         const name = card.getAttribute('data-mc-name');
@@ -952,6 +1111,11 @@
     async function submitVotes() {
       if (!userAk) {
         userIdentityModal.classList.remove('hidden');
+        return;
+      }
+
+      if (isVotingClosed()) {
+        alert("Las votaciones han sido cerradas por la organización.");
         return;
       }
 
@@ -1009,6 +1173,71 @@
         }
       }
     }
+
+    /* ACCIÓN BOTÓN MODO PRUEBA */
+    testModeResetBtn.addEventListener('click', () => {
+      localStorage.removeItem('rawzone_has_voted');
+      localStorage.removeItem('rawzone_voting_closed');
+      localStorage.removeItem('rawzone_selected_mcs');
+      selectedMcs = [];
+      updateUI();
+      alert("✅ Modo prueba activo: Votaciones reabiertas y voto local reiniciado. Puedes volver a votar.");
+    });
+
+    /* LÓGICA BATALLA FINAL CON CONTRASEÑA */
+    openFinalBattlePassModalBtn.addEventListener('click', () => {
+      passInput.value = '';
+      passError.classList.add('hidden');
+      finalBattlePassModal.classList.remove('hidden');
+    });
+
+    closePassModalBtn.addEventListener('click', () => {
+      finalBattlePassModal.classList.add('hidden');
+    });
+
+    passForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const enteredPass = passInput.value;
+
+      if (enteredPass === "@Adrianmoreno2005") {
+        passError.classList.add('hidden');
+        finalBattlePassModal.classList.add('hidden');
+
+        // Cerrar votaciones local y globalmente en esta sesión
+        localStorage.setItem('rawzone_voting_closed', 'true');
+        updateUI();
+
+        // Obtener veredicto
+        const top2 = await fetchVotes();
+        
+        if (top2 && top2.length >= 2) {
+          finalMc1.textContent = top2[0].name || "N/A";
+          finalMc1Votes.textContent = `${top2[0].votes || 0} votos`;
+          
+          finalMc2.textContent = top2[1].name || "N/A";
+          finalMc2Votes.textContent = `${top2[1].votes || 0} votos`;
+        } else if (top2 && top2.length === 1) {
+          finalMc1.textContent = top2[0].name || "N/A";
+          finalMc1Votes.textContent = `${top2[0].votes || 0} votos`;
+          
+          finalMc2.textContent = "SIN DATOS";
+          finalMc2Votes.textContent = "0 votos";
+        } else {
+          finalMc1.textContent = "SIN VOTOS";
+          finalMc1Votes.textContent = "0 votos";
+          finalMc2.textContent = "SIN VOTOS";
+          finalMc2Votes.textContent = "0 votos";
+        }
+
+        finalBattleVeredictModal.classList.remove('hidden');
+      } else {
+        passError.classList.remove('hidden');
+      }
+    });
+
+    closeVeredictBtn.addEventListener('click', () => {
+      finalBattleVeredictModal.classList.add('hidden');
+    });
 
     lockVotesBtn.addEventListener('click', submitVotes);
     dockLockBtn.addEventListener('click', submitVotes);
